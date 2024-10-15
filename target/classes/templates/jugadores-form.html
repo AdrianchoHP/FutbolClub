@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="Content-Type" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Agregar Jugador</title>
+	<link rel="stylesheet" th:href="@{https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css}" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" th:href="@{/style.css}">
+</head>
+
+<body>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark p-4">
+		<div class="container d-flex justify-content-center align-items-center">
+			<img th:src="@{/logo.png}" alt="logo" class="img-fluid mr-3" style="max-width: 70px;">
+			<a class="navbar-brand">
+				<span class="title">Academia De Fútbol Club</span>
+			</a>
+		</div>
+	</nav>
+    <main>
+		<div class="container d-flex flex-column justify-content-center align-items-center">
+				
+				    <h2 class="text-center custom-header mt-4">Agregar Jugador</h2>
+		            
+            <form th:action="@{/jugadores/save}" th:object="${jugadores}" method="post" id="formu">
+                <input type="hidden" th:field="*{id}">
+                <div class="form-floating">
+                    <label for="name" class="form-label p-2">Nombre: </label>
+                    <input type="text" id="name" th:field="*{nombre}" placeholder="Nombre" class="form-control" required>
+                </div>
+                <br>
+                <div class="form-floating">
+                    <label for="name" class="form-lable p-2">Apellido: </label>
+                    <input type="text" id="apellido" th:field="*{apellido}" placeholder="Apellido" class="form-control" required>
+                </div>
+                <br>
+                <div class="form-floating">
+                    <label for="name" class="form-lable p-2">Número: </label>
+                    <input type="text" id="nro" th:field="*{numero}" placeholder="Número" class="form-control" required>
+                </div>
+                <br>
+                <div class="form-floating">
+                    <label for="posicion" class="form-label p-2">Posición:</label>
+                    <select id="posicion" th:field="*{posicion}" name="posicion" class="form-control" required>
+                        <option value="">Posición</option>
+                        <option value="Portero">Portero</option>
+                        <option value="Defensor">Defensor</option>
+                        <option value="Centrocampista">Centrocampista</option>
+                        <option value="Delantero">Delantero</option>
+                    </select>
+                </div>
+				<div class="form-floating">
+					<label for="club" class="form-label p-2">Club:</label>
+					<select id="club" th:field="*{club}" class="form-control" required>
+						<option value="">Selecciona un club</option>
+						<option th:each="club : ${clubesList}" th:value="${club.id}" th:text="${club.nombre}"></option>
+					</select>
+				</div>
+                <div id="error-messages" th:classappend="${errorMessage} ? 'bg-red-100 border border-red-700 text-red-700 px-4 py-3 rounded relative' : ''" th:text="${errorMessage}">
+                </div>
+                <br>
+				
+				<div class="return mb-3">
+					<a class="btn btn-primary "  th:href="@{/jugadores}">
+						Volver
+					</a>
+				</div>
+				
+				<div>
+					<input type="submit" class="form-control btn-success me-4" value="Agregar">
+				</div>
+				
+            </form>
+        </div>
+        <br><br>
+        <script th:src="@{/JS/App.js}"></script>
+    </main>
+	
+	<footer class="footer bg-dark text-white fixed-bottom">
+		<div class="container">
+			<p class="text-center mb-0 py-2">Adrian Farid Hernandez Prince</p>
+		</div>
+	</footer>
+
+	<script th:src="@{https://code.jquery.com/jquery-3.3.1.slim.min.js}" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js}" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+	<script th:src="@{https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js}" intity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+</body>
+
+</html>
